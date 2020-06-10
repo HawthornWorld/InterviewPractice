@@ -663,3 +663,81 @@ levelOrderWithSplit(root);
 
 
 
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * 求二叉树的最小深度
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var minDepth = function(root) {
+    if(root == null) return 0;
+    let queue = [];
+    queue.push(root);
+    let deep = 1;
+    while(queue.length>0) {
+        let size = queue.length;
+        while(size > 0) {
+            let tmp = queue.shift();
+            size--
+            if(tmp.left == null && tmp.right == null) {
+                return deep
+            }
+            if(tmp.left != null) {
+                queue.push(tmp.left)
+            }
+            if(tmp.right != null) {
+                queue.push(tmp.right)
+            }
+        }
+        deep++
+    }
+    return deep
+};
+
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+
+/**
+ * 求二叉树的最大深度
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var maxDepth = function (root) {
+    if (root == null) return 0;
+    let queue = [];
+    queue.push(root);
+    let deep = 1;
+    while (queue.length > 0) {
+        let size = queue.length;
+        while (size > 0) {
+            let tmp = queue.shift();
+            size--
+            if (tmp.left != null) {
+                queue.push(tmp.left)
+            }
+            if (tmp.right != null) {
+                queue.push(tmp.right)
+            }
+            if (tmp.left != null || tmp.right != null) {
+                deep++
+            }
+        }
+    }
+    return deep
+}
+
+// q：测试用例 [1,2,3,4,null,null,5] 未能通过 deep多了一次
+
+
