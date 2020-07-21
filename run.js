@@ -69,7 +69,7 @@ Array.prototype.myReduce = function (fn, initialVal) {
 		startIdx = 0;
 	if (initialVal !== undefined) {
 		acc = initialVal;
-		startIdx = 1;
+		// startIdx = 1;
 	}
 	for (let i = startIdx; i < arr.length; i++) {
 		// 回调函数返回累计值
@@ -77,6 +77,10 @@ Array.prototype.myReduce = function (fn, initialVal) {
 	}
 	return acc;
 };
+
+console.log('reduce!!!!!!!!',[1,2,3].myReduce(function(a,b){
+  return a+b
+}, 10))
 
 /**
  * filter
@@ -330,6 +334,8 @@ function debounce(fn = () => {}, delay) {
 // };
 // const res = myCurry(add);
 // res(a)(b)(c)(d);
+
+
 /**
  * sleep
  * */
@@ -741,3 +747,39 @@ var maxDepth = function (root) {
 // q：测试用例 [1,2,3,4,null,null,5] 未能通过 deep多了一次
 
 
+
+/**
+ * curry
+ * 只传递给函数一部分参数来调用它，让它返回一个函数去处理剩下的参数。
+ * */
+function myCurry(fn) {
+	let argLen = fn.length;
+	let args = [];
+	let self = this;
+	return function () {
+		args = args.concat(Array.prototype.slice.call(arguments));
+		if (args.length < argLen) {
+			return arguments.callee;
+		}
+		return fn.apply(self, args);
+	};
+}
+const add = function (a, b, c, d) {
+	return a + b + c + d;
+};
+const res = myCurry(add);
+console.log(res)
+res(1)(2)(3)(4);
+console.log('res',res(1)(2)(3)(4));
+
+
+/**
+ * @param {string} s1
+ * @param {string} s2
+ * @return {boolean}
+ */
+var isFlipedString = function(s1, s2) {
+    if(s1.length != s2.length) return false;
+    ss = s2 + s2;
+    return ss.includes(s1);
+};
