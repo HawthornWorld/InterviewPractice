@@ -69,3 +69,15 @@ var isBalanced = function (root) {
 	let right = maxDepth(root.right);
 	return Math.abs(left - right) <= 1 && isBalanced(root.left) && isBalanced(root.right);
 };
+
+
+
+// res.data.data.data数组中的某个属性值重新赋值
+function() {
+    // 请求已经拿到res
+    let arr = res.data.data.data;
+    arr.forEach(item => {
+        item.myProp = item.myProp[0];
+    })
+    return arr
+}
