@@ -68,6 +68,23 @@ var fn = function (input) {
 function milliFormat(num){
   if(isNaN(num)) return new TypeError('param should be a number');
   let tmp = num.toString();
-  const res = tmp.replace(/\d(?=(\d{3})+$)/g,',');
+  const res = tmp.replace(/\B(?=(\d{3})+$)/g,','); // /(?=(\B\d{3})+$)/g 也对
   return res;
 }
+
+function thousandth(num) {
+  const numArr = (num + "").split("");
+  const len = numArr.length;
+  let cnt = 1;
+  let resStr = "";
+  for (let i = len - 1; i >= 0; i--) {
+   resStr = numArr[i] + resStr;
+   if (cnt % 3 === 0 && i !== 0) {
+    resStr = "," + resStr;
+   }
+   cnt++;
+  }
+  return resStr;
+ }
+ 
+ console.log(thousandth(100028741000));
