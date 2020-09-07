@@ -8,7 +8,7 @@
 //         console.log('receiver', receiver)
 //         let value = target[property];
 //         if (!value) {
-//             throw Error(`your property ${peoperty} is not exist`)
+//             throw Error(`your property ${property} is not exist`)
 //         }
 //         return value;
 //     },
