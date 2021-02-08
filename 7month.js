@@ -70,3 +70,33 @@ var isBalanced = function (root) {
 	return Math.abs(left - right) <= 1 && isBalanced(root.left) && isBalanced(root.right);
 };
 
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ * 一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过1。
+ */
+var isBalanced = function (root) {
+	if (root === null) return true;
+	let left = maxDepth(root.left);
+	let right = maxDepth(root.right);
+	return Math.abs(left - right) <= 1 && isBalanced(root.left) && isBalanced(root.right);
+};
+
+
+
+// res.data.data.data数组中的某个属性值重新赋值
+function() {
+    // 请求已经拿到res
+    let arr = res.data.data.data;
+    arr.forEach(item => {
+        item.myProp = item.myProp[0];
+    })
+    return arr
+}
