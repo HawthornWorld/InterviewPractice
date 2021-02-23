@@ -10,6 +10,7 @@
 /**
  * @param {TreeNode} root
  * @return {number}
+ * 前序递归
  */
 function maxDepth(root) {
 	return root === null ? 0 : Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
@@ -25,6 +26,7 @@ function maxDepth(root) {
 /**
  * @param {TreeNode} root
  * @return {number}
+ * 前序非递归
  */
 var maxDepth = function (root) {
 	if (root == null) return 0;
@@ -70,29 +72,10 @@ var isBalanced = function (root) {
 	return Math.abs(left - right) <= 1 && isBalanced(root.left) && isBalanced(root.right);
 };
 
-/**
- * Definition for a binary tree node.
- * function TreeNode(val) {
- *     this.val = val;
- *     this.left = this.right = null;
- * }
- */
-/**
- * @param {TreeNode} root
- * @return {boolean}
- * 一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过1。
- */
-var isBalanced = function (root) {
-	if (root === null) return true;
-	let left = maxDepth(root.left);
-	let right = maxDepth(root.right);
-	return Math.abs(left - right) <= 1 && isBalanced(root.left) && isBalanced(root.right);
-};
-
 
 
 // res.data.data.data数组中的某个属性值重新赋值
-function() {
+function hh() {
     // 请求已经拿到res
     let arr = res.data.data.data;
     arr.forEach(item => {
@@ -100,3 +83,8 @@ function() {
     })
     return arr
 }
+
+/**
+ * 最短路径
+ */
+

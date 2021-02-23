@@ -392,77 +392,81 @@ function debounce(fn = () => {}, delay) {
 // 作用域输出问题
 
 // 字节题目二：
-// var a = 10;
-// (function(){
-//     console.log(a); // 'undefined'
-//     a = 5;
-//     console.log(window.a); // 10
-//     var a = 20;
-//     console.log(a); // 20
-// })()
+var a = 10;
+(function(){
+    console.log(a); // 'undefined'
+    a = 5;
+    console.log(window.a); // 10
+    var a = 20;
+    console.log(a); // 20
+})()
 
-// var a = 10;
-// (function(){
-//     console.log(a); // Cannot access 'a' before initialization'
-//     a = 5;
-//     console.log(window.a); // 前面报错 后面不能输出了
-//     let a = 20;
-//     console.log(a);// 前面报错 后面不能输出了
-// })()
+var a = 10;
+(function(){
+    console.log(a); // Cannot access 'a' before initialization'
+	a = 5;
+    console.log(window.a); // 前面报错 后面不能输出了
+    let a = 20;
+    console.log(a);// 前面报错 后面不能输出了
+})()
 
 // 字节题目一：
-// inner = "window";
-// function say() {
-// 	console.log(inner);
-// 	console.log(this.inner);
-// }
-// var obj1 = (function () {
-// 	var inner = "1-1";
-// 	return {
-// 		inner: "1-2",
-// 		say: function () {
-// 			console.log(inner);
-// 			console.log(this.inner);
-// 		},
-// 	};
-// })();
+inner = "window";
+function say() {
+	console.log(inner);
+	console.log(this.inner);
+}
+var obj1 = (function () {
+	var inner = "1-1";
+	return {
+		inner: "1-2",
+		say: function () {
+			console.log(inner);
+			console.log(this.inner);
+		},
+	};
+})();
 
-// var obj1 = {
-// 	inner: "1-2",
-// 	say: function () {
-// 		console.log(inner);
-// 		console.log(this.inner);
-// 	},
-// };
+var obj1 = {
+	inner: "1-2",
+	say: function () {
+		console.log(inner);
+		console.log(this.inner);
+	},
+};
 
-// var obj2 = (function () {
-// 	var inner = "2-1";
-// 	return {
-// 		inner: "2-2",
-// 		say: function () {
-// 			console.log(inner);
-// 			console.log(this.inner);
-// 		},
-// 	};
-// })();
+var obj2 = (function () {
+	var inner = "2-1";
+	return {
+		inner: "2-2",
+		say: function () {
+			console.log(inner);
+			console.log(this.inner);
+		},
+	};
+})();
 
-// say();
-// // 'window'
-// // 'window'
-// obj1.say();
-// // '1-1'
-// // '1-2'
-// obj2.say();
-// // '2-1'
-// // '2-2'
-// obj1.say = say;
-// obj1.say();
-// // 'window'
-// // '1-2'
-// obj1.say = obj2.say;
-// obj1.say();
-// // '2-1'
-// // '1-2'
+say();
+// 'window'
+// 'window'
+obj1.say();
+// '1-1'
+// '1-2'
+obj2.say();
+// '2-1'
+// '2-2'
+obj1.say = say;
+obj1.say();
+// 'window'
+// '1-2'
+obj1.say = obj2.say;
+obj1.say();
+// '2-1'
+// '1-2'
+
+
+
+
 
 // var a = 10010;
 
