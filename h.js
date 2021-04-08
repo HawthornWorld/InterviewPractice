@@ -566,14 +566,14 @@ var obj = new Proxy({}, {
   
   
   // 用promise实现每隔1s输出一个数字
-  // const arr = [1, 2, 3]
-  // arr.reduce((p, x) => {
-  //   return p.then(() => {
-  //     return new Promise(r => {
-  //       setTimeout(() => r(console.log(x)), 1000)
-  //     })
-  //   })
-  // }, Promise.resolve())
+  const arr = [1, 2, 3]
+  arr.reduce((p, x) => {
+    return p.then(() => {
+      return new Promise(r => {
+        setTimeout(() => r(console.log(x)), 1000)
+      })
+    })
+  }, Promise.resolve())
   
   // 异步任务串行化
   
@@ -674,3 +674,5 @@ var obj = new Proxy({}, {
   function fn1(a,b,c,d) {
     return a + b + c + d
   }
+
+  
