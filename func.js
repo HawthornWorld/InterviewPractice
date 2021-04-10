@@ -1,4 +1,3 @@
-import { hidden } from "ansi-colors";
 
 //----------------------------------------------------------------------------------------flatten--------------------------------------------------------------------------------------------
 
@@ -237,9 +236,6 @@ function countTimes() {
 }
 console.log("countTimes", countTimes());
 
-// 实现reduce how?
-// reducer 接受四个参数 accumulator, currVal, currIndex
-function reduce(reducer, orginVal) {}
 
 // arr.join([separator])
 // separator 可选
@@ -792,4 +788,49 @@ var maxArea = function(height) {
 // };
 
 // coder.run();
+
+
+// reduce造轮子forEach 
+Array.prototype.myForEach = function (fn) {
+  return this.reduce((acc,cur,index,arr) => {
+    fn(cur,index)
+  })
+}
+// arr.myForEach((item,index) => {
+//   console.log(item,index)
+// })
+
+
+// reduce造轮子map
+Array.prototype.myMap = function(fn, thisArg) {
+  const result = [];
+  this.reduce((prev, curr, index, array) => {
+    result[index] = fn.call(thisArg, array[index], index, array);
+  }, 0)
+  return result;
+}
+// arr.myMap(function(c,i) {
+//   return c + i + this.length
+// },arr1)
+
+
+// 实现reduce how?
+// reducer 接受四个参数 accumulator, currVal, currIndex, originArr
+// 使用方式：arr.reduce((accumulator,currentVal, currentIdx, originArr), )
+Array.prototype.myReduce = function(reducer, initialVal) {
+    let arr = this;
+    let total = initialVal !== undefined ? initialVal : arr[0];
+    let startIdx = initialVal !== undefined ? 0 : 1;
+    arr.slice(startIdx).forEach((item, idx) => {
+      total = reducer(total, item, idx, arr);
+    })
+    return total;
+}
+
+let f9 = function(acc, val, idx, arr) {
+  return acc + val
+}
+console.log('1111111',[1,2,3,4].myReduce(f9));
+
+
 
