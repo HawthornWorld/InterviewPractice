@@ -132,41 +132,28 @@ var deleteNode = function(node) {
     node.next = node.next.next;
 };
 
-// 链表反转 
-var reverseList = function(head) {
-    let prev = null;
-    let curr = head;
-    while(curr) {
-        // 把下一项暂存
-        let next = curr.next;
-        // 让当前项指向前一项
-        curr.next = prev;
-        // 把当前项存
-        prev = curr;
-        curr = next;
+// 链表反转 1.用栈 2.迭代 3.递归
+var reverseList1 = function(head) {
+    let newHead = null;
+    while(head != null) {
+        let temp = head.next;
+        head.next = newHead;
+        newHead = head;
+        head = temp;
     }
-    return prev;
+    return newHead;
 };
 
-// 函数柯里化 promise实现
-// 项目描述 *性能优化*
-// 框架原理 
+var recerseList2 = function(head) {
 
-  // 函数柯里化
-  function curry(fn) {
-    let args = arguments;
-    // 获取参数的长度
-    let len = fn.length;
-    let idx = 0;
-    if(idx < len -1) {
-      console.log('len', len);
-      return fn.apply(this, args[idx])
-    } else {
-      return
-    }
-  }
-  function fn1(a,b,c,d) {
-    return a + b + c + d
-  }
-  let curryFn = curry(fn1);
-  console.log(curryFn(1)(2)(3)(4));
+}
+var recerseList3 = function(head) {
+
+}
+
+
+
+  // 插入一个节点 O(1)
+
+
+
