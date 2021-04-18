@@ -144,16 +144,53 @@ var reverseList1 = function(head) {
     return newHead;
 };
 
-var recerseList2 = function(head) {
 
+
+
+
+ // 插入一个节点 O(1)
+
+var insertNode = function(item, node) {
+    item.next = node;
+    node.next = item.next.next;
 }
-var recerseList3 = function(head) {
 
-}
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
 
+/**
+ * @param {ListNode} head
+ * @return {boolean}
+ * 判断链表中是否存在环
+ */
+var hasCycle = function(head) {
+    if(head === null || head.next === null) return false;
+    let fast = slow = head 
+    while(fast !== null && fast.next !== null) {
+        fast = fast.next.next;
+        slow = slow.next;
+        if(fast == flow) return true;
+    }
+    return false;
+};
 
-
-  // 插入一个节点 O(1)
-
-
+/**
+ *寻找中间节点
+ *如果有两个中间结点，则返回第二个中间结点
+ *输入[1,2,3,4,5] 预期输出[3,4,5]
+ */ 
+var middleNode = function(head) {
+    if(head === null || head.next === null) return head;
+    let fast = slow = head 
+    while(fast !== null && fast.next !== null) {
+        fast = fast.next.next;
+        slow = slow.next;
+    }
+    return slow
+};
 

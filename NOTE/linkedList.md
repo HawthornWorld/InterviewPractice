@@ -61,6 +61,10 @@ var deleteNode = function(node) {
 ```
 - 增
 ```
+var insertNode = function(node) {
+    item.next = node;
+    node.next = item.next.next;
+}
 ```
 - 改
 ```
@@ -73,27 +77,46 @@ var deleteNode = function(node) {
 
 - 链表反转
 
+迭代 把原链表的node依次拿出来接到新链表的头部
 ``` 
-迭代
-var reverseList1 = function(head) {
+var reverseList = function(head) {
+    // newHead存放新链表的头部
     let newHead = null;
-    while(head != null) {
-        let temp = head.next;
+    while(head !== null) {
+        let tmp = head.next;
         head.next = newHead;
         newHead = head;
-        head = temp;
+        head = tmp;
     }
     return newHead;
 };
-
+```
 递归
 
-栈
+```
+var reverseList = function(head) {
+    if(head === null || head.next === null) {
+        return head;
+    }
+    let tmp = reverseList(head.next);
+    head.next.next = head;
+    head.next = null;
+    return tmp;
+}
+```
+
+栈 最笨的方式 需要额外空间
+
+```
+var reverseList = function(head) {
+    if(head === null || head.next === null) {
+        return head;
+    } 
+}
 
 ```
 
-
-- 寻找倒数第k个元素 快慢指针
+- 寻找倒数第k个元素 快慢指针 当快指针走了完之后，慢指针还有k步没走 从而得到倒数第k个节点
 
 ```
 var kthToLast = function(head, k) {
@@ -110,13 +133,38 @@ var kthToLast = function(head, k) {
 };
 ```
 
-- 找中点  快慢指针 
+- 找中点  快慢指针
 
 ```
+var middleNode = function(head) {
+    if(head === null || head.next === null) return head;
+    let fast = slow = head;
+    // 注意循环条件
+    while(fast !== null && fast.next !== null) {
+        fast = fast.next.next;
+        slow = slow.next;
+    }
+    return slow
+};
 ```
 
 - 判断是否循环链表 快慢指针
 
+```
+var hasCycle = function(head) {
+    if(head === null || head.next === null) return false;
+    let fast = slow = head 
+    while(fast !== null && fast.next !== null) {
+        fast = fast.next.next;
+        slow = slow.next;
+        if(fast == slow) return true;
+    }
+    return false;
+    
+};
+
+```
+- 移动节点 向前 向后
 ```
 ```
 
