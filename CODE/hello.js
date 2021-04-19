@@ -51,4 +51,3 @@ Promise.resolve().then(()=>{
 }).then(()=>{
     console.log(6);
 });
-	
