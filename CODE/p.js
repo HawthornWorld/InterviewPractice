@@ -88,19 +88,19 @@ function matchStr(str) {
   /**
    * 插入排序
    */
-  // function insertSort(arr) {
-  //   for (let i = 0; i < arr.length; i++) {
-  //     let pre = 0;
-  //     while (pre < i) {
-  //       arr[i] ^= arr[pre];
-  //       arr[pre] ^= arr[i];
-  //       arr[i] ^= arr[pre];
-  //     }
-  //     pre++;
-  //   }
-  //   console.log('arr',arr)
-  //   return arr
-  // }
+  function insertSort(arr) {
+    for (let i = 0; i < arr.length; i++) {
+      let pre = 0;
+      while (pre < i) {
+        arr[i] ^= arr[pre];
+        arr[pre] ^= arr[i];
+        arr[i] ^= arr[pre];
+      }
+      pre++;
+    }
+    console.log('arr',arr)
+    return arr
+  }
   // insertSort([1,26,3,5,6,23,2,7])
   /**
    * 选择排序
@@ -269,48 +269,7 @@ function matchStr(str) {
   );
   
   // promise
-  class MyPromise {
-    constructor(executor) {
-      this.executor = executor;
-      this.value = null;
-      this.status = "pending";
-      this.callbacks = [];
-      const resolve = value => {
-        if (this.status === "pending") {
-          this.value = value;
-          this.status = "fulfilled";
-        }
-      };
-      const reject = value => {
-        if (this.status === "pending") {
-          this.value = value;
-          this.status = "rejected";
-        }
-      };
   
-      this.executor = executor(resolve, reject);
-    }
-  
-    then(onFulfilled, onRejected) {
-      if (this.status === "pending") {
-        return new MyPromise((resolve, reject) => {
-          this.callbacks.push(() => {
-            resolve(onFulfilled(this.value));
-          });
-        });
-      }
-      if (this.status === "fulfilled") {
-        return new Promise((resolve, reject) => {
-          resolve(onFulfilled(this.value));
-        });
-      }
-      if (this.status === "rejected") {
-        return new Promise((resolve, reject) => {
-          resolve(onRejected(this.value));
-        });
-      }
-    }
-  }
   
   
   
