@@ -831,6 +831,3 @@ let f9 = function(acc, val, idx, arr) {
   return acc + val
 }
 console.log('1111111',[1,2,3,4].myReduce(f9));
-
-
-
