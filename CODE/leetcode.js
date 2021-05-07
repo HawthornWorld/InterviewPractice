@@ -404,4 +404,3 @@ removeDup([1, 2, 2, 5, 2, 3, 1, 7, 8, 9, 5, 6]);
 		console.log('hello world')
 	}
 })()
-
