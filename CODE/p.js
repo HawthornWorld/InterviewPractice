@@ -197,31 +197,8 @@ function matchStr(str) {
   // export export.default
   // 一天研究一个弱势问题 晚上刷题 白天忙技术栈和项目
   
-  // 层序遍历 每一层节点分别入栈， 每次拿出来一个。
-  function levelorder(node) {
-    if (node == null) return;
-    let queue = [];
-    queue.push(node);
-    let res = [];
-    while (queue.length > 0) {
-      let tmpArr = [];
-      let size = queue.length;
-      while (size > 0) {
-        let tmp = queue.shift();
-        size--;
-        tmpArr.push(tmp.val);
-        if (tmp.left != null) {
-          queue.push(tmp.left);
-        }
-        if (tmp.rigth != null) {
-          queue.push(tmp.right);
-        }
-      }
-      res.push(tmpArr);
-    }
-    return res;
-  }
-  
+
+
   // 字符串反转
   //'how _ do+you do' >> 'do you+do _ how'
   // function strReverse(s) {

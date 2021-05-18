@@ -404,3 +404,50 @@ removeDup([1, 2, 2, 5, 2, 3, 1, 7, 8, 9, 5, 6]);
 		console.log('hello world')
 	}
 })()
+
+
+/**
+ * 三数之和
+ * @param {给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有和为 0 且不重复的三元组。
+ * 注意：答案中不可以包含重复的三元组。
+ * @returns 
+ */
+function threeSum(nums) {
+    const len = nums.length;
+    if(nums === null || len < 3 ) return [];
+    nums.sort((a,b) => a - b);
+    let res = [];
+    for( let i = 0; i < len - 1; i++ ) {
+        let left = i + 1,
+        right = len - 1;
+        if(nums[i] === nums[i-1]) continue;
+        while(left < right) {
+            let threeSum = nums[i] + nums[left] + nums[right];
+            if(threeSum === 0) {
+                res.push([nums[i],nums[left],nums[right]]);
+                while(nums[left] === nums[left+1]) {
+                    left++;
+                }
+                while(nums[right] === nums[right-1]) {
+                    right--;
+                }
+                left++;
+                right--;
+            }
+            if(threeSum < 0) {
+                while(nums[left] === nums[left+1]) {
+                    left++;
+                }
+                left++
+            }
+            if(threeSum > 0) {
+                while(nums[right] === nums[right-1]) {
+                    right--;
+                }
+                right--;
+            }
+        }
+    }
+    return res;
+};
+console.log(threeNumSum([-1,0,1,2,-1,-4,-2,-3,3,0,4]));

@@ -132,10 +132,6 @@ var isBalanced = function (root) {
 		}
 		return res
 	}
-	
-	let arr1 = [{a:1,b:2}]
-	let arr2 = [{c:3,d:4}]
-	console.log(merge(arr1,arr2))
 
 
 	let flatter = (a1, a2) => {
@@ -155,3 +151,62 @@ var isBalanced = function (root) {
 		}, [])
 		return temp;
 	}
+
+	let preorder = function(node) {
+		if(node === null) return node;
+		console.log(node.val);
+		preorder(node.left);
+		preorder(node.right);
+	}
+
+	let inorder = function(node) {
+		if(node === null) return node;
+		inorder(node.left);
+		console.log(node.val);
+		inorder(node.right);
+	}
+
+	function TreeNode(val) {
+		this.val = val;
+		this.left = null;
+		this.right = null;
+	}
+
+	let root = new TreeNode(5);
+	let n1 = new TreeNode(3);
+	let n2 = new TreeNode(6);
+
+	root.left = n1;
+	root.right = n2;
+
+	let n3 = new TreeNode(2);
+	let n4 = new TreeNode(4);
+	n1.left = n3;
+	n1.right = n4;
+
+	let n5 = new TreeNode(1);
+	n3.left = n5;
+
+	let arr = [23,45,83,96,121,11,9,2,37];
+
+	function buildBST(arr) {
+		let root = new TreeNode(arr[0]);
+		for(let i = 1; i < arr.length; i++) {
+			let tmp = arr[i];
+			insertBST(root, tmp);
+		}
+		inorder(root);
+	}
+
+	function insertBST(root, val) {
+		if (root === null) {
+			return new TreeNode(val);
+		}
+		if (root.val > val) root.left = insertBST(root.left, val);
+		if (root.val < val) root.right = insertBST(root.right, val);
+		return root;
+	}
+
+	buildBST(arr)
+
+
