@@ -4,6 +4,7 @@
 
 
 - 插入排序
+
 ```
   function insertSort(arr) {
     for (let i = 0; i < arr.length; i++) {
@@ -19,6 +20,14 @@
     return arr
   }
 ```
+
+- 选择排序
+
+
+- 冒泡排序
+
+
+
 
 
 

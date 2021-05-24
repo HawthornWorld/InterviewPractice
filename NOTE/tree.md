@@ -13,6 +13,8 @@
 
 （满二叉树一定是完全二叉树，完全二叉树不一定是满二叉树）
 
+二叉搜索树：每一颗子树的左节点都小于根节点，右节点都大于根节点
+
 ### 2. 特点 逻辑上 物理上
 
 每个节点都只有有限个子节点或无子节点；
@@ -47,10 +49,64 @@
  }
 ```
 
+二叉搜索树构造
+
+```
+function buildBST(arr) {
+	let root = new TreeNode(arr[0]);
+	for(let i = 1; i < arr.length; i++) {
+		let tmp = arr[i];
+		insertBST(root, tmp);
+	}
+	inorder(root);
+}
+
+function insertBST(root, val) {
+	if (root === null) {
+		return new TreeNode(val);
+	}
+	if (root.val > val) root.left = insertBST(root.left, val);
+	if (root.val < val) root.right = insertBST(root.right, val);
+	return root;
+}
+
+buildBST(arr)
+```
+
 
 ### 5. 二叉树操作的实现
 
+- 层序遍历
 
+```
+function levelorder() {
+  if(root === null) return [];
+  let queue = [];
+  queue.push(root);
+  while(queue.length > 0) {
+    let tmp = queue.shift();
+    console.log(tmp.val)
+    if(tmp.left !== null) queue.push(tmp.left);
+    if(tmp.right !== null) queue.push(tmp.right);
+  }
+}
+```
+
+```
+let preorder = function(node) {
+	if(node === null) return node;
+	console.log(node.val);
+	preorder(node.left);
+	preorder(node.right);
+}
+
+let inorder = function(node) {
+	if(node === null) return node;
+	inorder(node.left);
+	console.log(node.val);
+	inorder(node.right);
+}
+```
 
 
 ### 6. 二叉树常见题型
@@ -83,14 +139,33 @@ var maxDepth = function (root) {
 			if (tmp.right != null) {
 				queue.push(tmp.right);
 			}
-			// if (tmp.left != null || tmp.right != null) {
-			//     deep++
-			// }
 		}
 		deep++;
 	}
 	return deep;
 };
+```
+
+```
+function maxDepth(root) {
+  if(root === null) return [];
+  let queue = [];
+  queue.push(root);
+  let res = [];
+  while(queue.length > 0) {
+    let size = queue.length;
+    let levelValues = [];
+    while(size > 0) {
+      size--;
+      let tmp = queue.shift();
+      levelValues.push(tmp.val);
+      if(tmp.left !== null) queue.push(tmp.left);
+      if(tmp.right !== null) queue.push(tmp.right);
+    }
+    res.push(levelValues)
+  }
+  return res.length;
+}
 ```
 
 - 是否平衡二叉树
@@ -106,6 +181,47 @@ var isBalanced = function (root) {
 	let left = maxDepth(root.left);
 	let right = maxDepth(root.right);
 	return Math.abs(left - right) <= 1 && isBalanced(root.left) && isBalanced(root.right);
+};
+```
+
+- 二叉树中和为某一值的路径(DFS)
+
+```
+写法1: 递归不回溯--DFS传递path副本，res每次push传递的副本
+var pathSum = function(root, sum) {
+  if (root === null) return [];
+  const res = [];
+  const DFS = (root, sum, path) => {
+	path.push(root.val);
+	sum -= root.val;
+    if (sum === 0 && !root.left && !root.right) {
+        res.push(path);
+    }
+    if (root.left) DFS(root.left, sum, path.slice());
+    if (root.right) DFS(root.right, sum, path.slice());
+  }
+  DFS(root, sum, []);
+  return res;
+};
+```
+
+```
+写法2: 回溯--DFS不传递path，path唯一，res每次push副本
+var pathSum = function(root, sum) {
+	if (root === null) return [];
+	const res = [], path = [];
+	var DFS = (root, sum) => {
+		path.push(root.val);
+		sum -= root.val;
+		if(sum == 0 && root.left == null && root.right == null) {
+			res.push(path.slice()); // 要拷贝一份path，否则会被更改影响
+		}
+		if (root.left) DFS(root.left, sum);
+		if (root.right) DFS(root.right, sum);
+		path.pop(); // 向上回溯时，将当前节点从path中删除。想象一下递归的出栈顺序
+	}
+	DFS(root, sum)
+	return res;
 };
 ```
 
